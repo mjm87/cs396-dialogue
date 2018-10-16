@@ -14,13 +14,13 @@ public class OptionManager : MonoBehaviour {
 	// list of references to all existing child optionObjects
 	private Dictionary<string, Transform> optionObjects = new Dictionary<string, Transform>();
 
-
-	//TODO: remove after testing
-	public List<string> hardCodedOptions;
+	public string selectedOption = "";
 
 	void Start() {
 
-		hardCodedOptions = new List<string>();
+
+	//TODO: remove after testing
+		List<string> hardCodedOptions = new List<string>();
 		hardCodedOptions.Add("1. Do something");
 		hardCodedOptions.Add("2. Do something else");
 		hardCodedOptions.Add("3. Stop worrying about it");
@@ -33,6 +33,7 @@ public class OptionManager : MonoBehaviour {
 	public void DisplayOptions(List<string> options){
 
 		ClearDisplay();
+		selectedOption = "";
 		
 		Vector3 spawnPosition = transform.position;
 		int optionNumber = 1;
@@ -70,9 +71,7 @@ public class OptionManager : MonoBehaviour {
 	}
 
 	public void SelectThisOption(string optionText) {
-		// optionObjects[optionText];
 		Debug.Log("Clicked on " + optionText);
-		hardCodedOptions.Remove(optionText);
-		DisplayOptions(hardCodedOptions); 
+		selectedOption = optionText;
 	}
 }

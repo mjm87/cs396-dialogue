@@ -12,28 +12,32 @@ public class OptionManager : MonoBehaviour {
 	private float optionGap = 1f;
 
 	// list of references to all existing child optionObjects
-	private Dictionary<string, OptionScript> optionObjects = new Dictionary<string, OptionScript>();
+	private Dictionary<string, Transform> optionObjects = new Dictionary<string, Transform>();
+
+
+	//TODO: remove after testing
+	public List<string> hardCodedOptions;
 
 	void Start() {
 
-		List<string> hardCodedOptions = new List<string>();
+		hardCodedOptions = new List<string>();
 		hardCodedOptions.Add("1. Do something");
 		hardCodedOptions.Add("2. Do something else");
 		hardCodedOptions.Add("3. Stop worrying about it");
 		hardCodedOptions.Add("4. Stop playing the game");
-		hardCodedOptions.Add("1. Do something");
 		
 		DisplayOptions(hardCodedOptions);
+
 	}
 
 	public void DisplayOptions(List<string> options){
 
-		// ClearDisplay();
+		ClearDisplay();
 		
 		Vector3 spawnPosition = transform.position;
 		int optionNumber = 1;
 
-		optionObjects = new Dictionary<string, OptionScript>();
+		optionObjects = new Dictionary<string, Transform>();
 		foreach(string optionText in options){
 
 			// create the object
@@ -41,18 +45,18 @@ public class OptionManager : MonoBehaviour {
 			optObj.parent = this.transform;
 			optObj.name = "Option " + optionNumber;
 
-			// // Assign relevant optionScript information
-			// OptionScript optionScript = optObj.GetComponent<OptionScript>();
-			// optionScript.optionText = optionText;
-			// optionScript.manager = this;
-
+			// assign the object text
 			optObj.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = optionText;
 
+			// assign the callback function for selection
 			optObj.GetComponent<Button>().onClick.AddListener(delegate {
 				this.SelectThisOption(optObj.GetComponentInChildren<TMPro.TextMeshProUGUI>().text);
 			});
 
-			// optionObjects.Add(optionText, optionScript);
+			// save off object reference
+			optionObjects.Add(optionText, optObj);
+
+			// go to next option
 			spawnPosition += Vector3.down * optionGap;
 			optionNumber++;
 
@@ -60,13 +64,15 @@ public class OptionManager : MonoBehaviour {
 	}
 
 	public void ClearDisplay(){
-		foreach(OptionScript option in optionObjects.Values){
-			option.Remove();
+		foreach(Transform option in optionObjects.Values){
+			GameObject.Destroy(option.gameObject);
 		}
 	}
 
 	public void SelectThisOption(string optionText) {
 		// optionObjects[optionText];
 		Debug.Log("Clicked on " + optionText);
+		hardCodedOptions.Remove(optionText);
+		DisplayOptions(hardCodedOptions); 
 	}
 }

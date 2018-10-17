@@ -1,0 +1,15 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0711c39544f3394c9f8ad6a60cf9f4e, type: 3}
+  m_Name: Option1a
+  m_EditorClassIdentifier: 
+  text: Not really, no...
+  next: {fileID: 11400000, guid: d74f8c67e35f9274e999ba29383faad1, type: 2}

@@ -1,0 +1,26 @@
+1. Have you ever considered doing something new with your life?
+- Not really, no... (2)
+- Yeah, well just the other day... (EOF)
+
+2. Well you really should. My friend Sal was just minding her own business the other day and decided to become a math major!
+- You don't say. (3)
+- Well there's hope for some of us. (4)
+- 3.1415... (EOF)
+
+3. I suppose that's the last of her we'll see for a while. (EOF)
+
+4. Hey! What do you mean by that!
+- Nothing. Nothing whatsoever. (EOF)
+- Let's face it, you and I were never making it through those Calculus-infested waters. (5)
+
+5. I suppose that's true. (EOF)
+
+
+Conversation:
+    - id
+    - text
+    - associated options
+
+Option:
+    - text
+    - next stage

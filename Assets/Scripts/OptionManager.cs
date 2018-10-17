@@ -26,7 +26,7 @@ public class OptionManager : MonoBehaviour {
 		hardCodedOptions.Add("3. Stop worrying about it");
 		hardCodedOptions.Add("4. Stop playing the game");
 		
-		DisplayOptions(hardCodedOptions);
+		// DisplayOptions(hardCodedOptions);
 
 	}
 
@@ -39,12 +39,17 @@ public class OptionManager : MonoBehaviour {
 		int optionNumber = 1;
 
 		optionObjects = new Dictionary<string, Transform>();
-		foreach(string optionText in options){
+		foreach(string optionTextString in options){
+
+			string optionText = optionTextString;
+			// string optionText = "  " + optionTextString;
 
 			// create the object
 			Transform optObj = Instantiate<Transform>(optionPrefab, spawnPosition, Quaternion.identity);
 			optObj.parent = this.transform;
 			optObj.name = "Option " + optionNumber;
+			setTransformRectWidth(optObj.gameObject, 18 * optionText.Length);		
+				// TODO: account for extra padding left over thanks to non-monospaced fonts
 
 			// assign the object text
 			optObj.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = optionText;
@@ -68,10 +73,22 @@ public class OptionManager : MonoBehaviour {
 		foreach(Transform option in optionObjects.Values){
 			GameObject.Destroy(option.gameObject);
 		}
+		optionObjects = new Dictionary<string, Transform>();
 	}
 
 	public void SelectThisOption(string optionText) {
-		Debug.Log("Clicked on " + optionText);
-		selectedOption = optionText;
+		selectedOption = optionText; 
+		ClearDisplay();
+	}
+
+	private void setTransformRectWidth(GameObject obj, float width) {
+		// obj.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(
+		// 	RectTransform.Axis.Horizontal, 
+		// 	width
+		// );
+		float height = obj.GetComponent<RectTransform>().sizeDelta.y;
+		obj.GetComponent<RectTransform>().sizeDelta = new Vector3(width, height);
+		obj.transform.Translate(Vector3.right * width/2);
+
 	}
 }

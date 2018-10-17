@@ -14,13 +14,3 @@
 - Let's face it, you and I were never making it through those Calculus-infested waters. (5)
 
 5. I suppose that's true. (EOF)
-
-
-Conversation:
-    - id
-    - text
-    - associated options
-
-Option:
-    - text
-    - next stage
